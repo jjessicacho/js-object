@@ -4,22 +4,36 @@ grab some HTML elements
 const output        = document.getElementById("output");
 
 
-
-
 /*
 PART 1a
 DEFINE A Card OBJECT
 */
+const card = {
+    // properties (variables)
+    // propertyName: value,
+    face: "King", 
+    value: 10,   
+    suit: "Heart",
+    
+    // behaviour (functions)
+    // functionName: function(){}
+    describeSelf: function(){
+        return `${this.face} of ${this.suit}s. Value: ${this.value}`;
+    }
 
+}
 
 /*
 PART 1b
 INSTANTIATE A Card OBJECT and 
 display the value returned by the describeSelf() function
 */
-
-
-
+// access object directly
+output.innerHTML += "<h2>Part 1: Card Object</h2>";
+output.innerHTML += "<p>Before we build the full Deck of Cards, a single example, demonstration Card object has been created:</p>";
+output.innerHTML += `<strong>${card.describeSelf()}</strong>`;
+// instantiate 
+const card01 = object.create(card);
 
 
 /*
