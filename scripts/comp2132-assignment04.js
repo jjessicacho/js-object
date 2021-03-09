@@ -8,6 +8,7 @@ const output        = document.getElementById("output");
 PART 1a
 DEFINE A Card OBJECT
 */
+// constructor function
 const card = {
     // properties (variables)
     // propertyName: value,
@@ -31,9 +32,8 @@ display the value returned by the describeSelf() function
 // access object directly
 output.innerHTML += "<h2>Part 1: Card Object</h2>";
 output.innerHTML += "<p>Before we build the full Deck of Cards, a single example, demonstration Card object has been created:</p>";
-output.innerHTML += `<strong>${card.describeSelf()}</strong>`;
-// instantiate 
-const card01 = object.create(card);
+output.innerHTML += `<p><strong>${card.describeSelf()}</strong></p>`;
+
 
 
 /*
@@ -59,6 +59,18 @@ class Deck{
         //each time, instantiate a new Card
         //add new cards to the using Array.push()
         //eg:    this.cards.push( newCardObject );
+
+        for(let suitCounter = 0; suitCounter < this.suits.length; suitCounter++) {
+            for(let faceValueCounter = 0; faceValueCounter < this.faces.length && this.values.length; faceValueCounter++){
+                const newCard = {
+                    Suit: this.suits[suitCounter],
+                    Face: this.faces[faceValueCounter],
+                    Value: this.values[faceValueCounter]
+                }
+
+                this.cards.push( newCard );
+            }
+        }
         
     }
 }
@@ -107,20 +119,34 @@ Deck.prototype.describeSelf = function(){
 PART 2b
 INVOKE AND DISPLAY Deck OBJECT FUNCTIONS
 */
+// access object directly
+output.innerHTML += "<h2>Part 2: Deck Object Containing Card Objects</h2>";
+
+/*
+INSTANTIATE A NEW OBJECT
+const myObjectInstance = new ObjectName();
+*/
+const myDeckOfCards = new Deck();
 
 //invoke and display the Deck function describeSelf() here...
+output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 
 //rendomize the cards in the deck using shuffle()
+myDeckOfCards.shuffle();
 
 //take the next card from the deck using dealCard()
+let myCards = myDeckOfCards.dealCard();
+output.innerHTML += `<p>You've been dealt a ${myCards.Suit} of ${myCards.Face}s. Value: ${myCards.Value}</p>`;
 
 //invoke and display the Deck function describeSelf() AGAIN here...
+output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 
 //take the next card from the deck using dealCard()
+myCards = myDeckOfCards.dealCard();
+output.innerHTML += `<p>You've been dealt a ${myCards.Suit} of ${myCards.Face}s. Value: ${myCards.Value}</p>`;
 
 //invoke and display the Deck function describeSelf() AGAIN here...
-
-
+output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 
 
 
