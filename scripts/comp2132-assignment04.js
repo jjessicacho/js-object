@@ -131,19 +131,19 @@ const myDeckOfCards = new Deck();
 //invoke and display the Deck function describeSelf() here...
 output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 
-//rendomize the cards in the deck using shuffle()
+//randomize the cards in the deck using shuffle()
 myDeckOfCards.shuffle();
 
 //take the next card from the deck using dealCard()
 let myCards = myDeckOfCards.dealCard();
-output.innerHTML += `<p>You've been dealt a ${myCards.Suit} of ${myCards.Face}s. Value: ${myCards.Value}</p>`;
+output.innerHTML += `<p>You've been dealt a ${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</p>`;
 
 //invoke and display the Deck function describeSelf() AGAIN here...
 output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 
 //take the next card from the deck using dealCard()
 myCards = myDeckOfCards.dealCard();
-output.innerHTML += `<p>You've been dealt a ${myCards.Suit} of ${myCards.Face}s. Value: ${myCards.Value}</p>`;
+output.innerHTML += `<p>You've been dealt a ${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</p>`;
 
 //invoke and display the Deck function describeSelf() AGAIN here...
 output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
@@ -154,15 +154,98 @@ output.innerHTML += `<p>${myDeckOfCards.describeSelf()}</p>`;
 PART 3a
 DEFINE A Player OBJECT
 */
+class Player{
 
+    constructor( playerName ){
+        // identify the player
+        this.players = playerName;
 
+        // Card
+        this.faces   = ["Ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"];        
+        this.values  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];        
+        this.suits   = ["Spade","Club","Heart","Diamond"];  
+        
+        //use an array to store players
+        this.cards = [];
+    } 
+
+    addCardToHand( Card ){
+        for(let suitCounter = 0; suitCounter < this.suits.length; suitCounter++) {
+            for(let faceValueCounter = 0; faceValueCounter < this.faces.length && this.values.length; faceValueCounter++){
+                const newCard = {
+                    Suit: this.suits[suitCounter],
+                    Face: this.faces[faceValueCounter],
+                    Value: this.values[faceValueCounter]
+                }
+
+                this.cards.push( newCard );
+            }
+        }
+
+        return Card;
+    }
+
+    describeSelf(){
+        let string = `${this.players}'s hand:<br>`;
+        string += `<ul>`;
+        // card list 
+            myCards = myDeckOfCards.dealCard();
+            string += `<li>${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</li>`;
+            myCards = myDeckOfCards.dealCard();
+            string += `<li>${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</li>`;
+            myCards = myDeckOfCards.dealCard();
+            string += `<li>${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</li>`;
+            myCards = myDeckOfCards.dealCard();
+            string += `<li>${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</li>`;
+            myCards = myDeckOfCards.dealCard();
+            string += `<li>${myCards.Face} of ${myCards.Suit}s. Value: ${myCards.Value}</li>`;
+        string += `</ul>`;
+        return string;
+     }
+}
+
+Player.prototype.dealCard = function(){
+ 
+    //remove and return the first item in array
+    //and shift the index of remaining items 
+    const card = this.cards.shift();
+    //if we have run out of cards...
+    if(card === undefined){
+        return 'No more cards';
+    }else{
+        //return the next card in the array
+        return card;
+    }         
+}
+
+Player.prototype.shuffle = function(){
+ 
+    let j, x, i;
+    //loop through the entire array
+    for (i = this.cards.length - 1; i > 0; i--) {
+        //randomly select a card
+        j = Math.floor(Math.random() * (i + 1));
+        x = this.cards[i];
+        //resort cards
+        this.cards[i] = this.cards[j];
+        this.cards[j] = x;
+    }
+    //return the randomly sorted array
+    return this.cards;       
+}
 
 
 /*
 PART 3b
 Instantiate Two Player OBJECTs
 and deal five cards to each
-
 display to the browser the contents 
 of each player's hand
 */
+// Instantiate Two Player OBJECTs
+const myPlayer01 = new Player("Jessica");
+output.innerHTML += "<h2>Part 3: Player Object Using Deck of Cards</h2>";
+output.innerHTML += `<p>${myPlayer01.describeSelf()}</p>`;
+
+const myPlayer02 = new Player("Joe");
+output.innerHTML += `<p>${myPlayer02.describeSelf()}</p>`;
