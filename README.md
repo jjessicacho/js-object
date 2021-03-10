@@ -11,6 +11,9 @@ I created a deck of cards using JavaScript Objects.
     - Instantiate two Player Objects and deal five cards to each
     - Display to the browser the contents of each player's hand
 
+## What I need to fix:
+- How to use forEach loop to list out the cards in the third part??
 ## Super helpful tutorial to solve this assignment
 - [Create a nest loop](https://www.youtube.com/watch?v=LxXWTXOny3A)
 - [Coding A Card Deck In JavaScript](https://www.thatsoftwaredude.com/content/6196/coding-a-card-deck-in-javascript)
+
